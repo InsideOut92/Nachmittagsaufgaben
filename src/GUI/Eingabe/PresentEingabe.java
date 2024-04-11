@@ -88,7 +88,7 @@ public class PresentEingabe {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.add(eingabePanel);
 
-        frame.setSize(200, 300);
+        frame.setSize(600, 400);
         frame.setVisible(true);
     }
 
