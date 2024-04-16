@@ -1,0 +1,1 @@
+[{"name": "Decke", "produkt_nr": "1001", "preis": 29.99, "fertigungsort": "Deutschland"}, {"name": "Kleid", "produkt_nr": "2001", "preis": 59.99, "fertigungsort": "Italien", "groessen": {"International": "M", "US": "8", "Europa": "38"}}, {"name": "Hemd", "produkt_nr": "4001", "preis": 34.99, "fertigungsort": "Indien"}]
