@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 class Product:
     def __init__(self, name, description, price, productnumber, discount, manufacturing_location, manufacturing_type):
         self.name = name
