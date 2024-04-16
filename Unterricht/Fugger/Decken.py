@@ -7,8 +7,8 @@ class Decken(product.Product):
     def __init__(self, name, description, price, productnumber, discount,
                  manufacturinglocation, manufacturingtype, length, width,
                  color, material):
-        super().init(name, description, price, productnumber, discount,
-                 manufacturinglocation, manufacturingtype)
+        super().__init__(name, description, price, productnumber, discount,
+                         manufacturinglocation, manufacturingtype)
         self.length = length
         self.width = width
         self.color = color
@@ -24,10 +24,10 @@ class Decken(product.Product):
                 f"Länge: {self.length} - Breite: {self.width} \n"
                 f"Farbe: {self.color} - Material: {self.material}")
 
-if __name__ == '__main':
-    decken = Decken("Decke", "Eine Baumwoll-Hanfdecke",
-                     20.99, 6851681, None,
-                     "Augsburg, Deutschland", "Handarbeit",
-                     2000, 4000, "Grau", "Baumwolle")
 
+if __name__ == '__main__':
+    decken = Decken("Decke", "Eine Baumwoll-Hanfdecke",
+                    20.99, 6851681, None,
+                    "Augsburg, Deutschland", "Handarbeit",
+                    2000, 4000, "Grau", "Baumwolle")
     print(decken)
