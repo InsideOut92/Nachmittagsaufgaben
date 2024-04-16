@@ -2,22 +2,19 @@
 
 from product import Product
 from Stoff import Stoff
-from Decken import Decken
-from Kleidung import Kleidung
-
 
 
 class Produktkatalog:
     def __init__(self):
-        self.produkte = []
+        self.produkte = {}
 
     def produkt_hinzufuegen(self, product):
-        self.produkte.append(product)
+        self.produkte[product.productnumber] = product
         print("Produkt erfolgreich hinzugefügt!")
 
-    def produkt_entfernen(self, product):
-        if product in self.produkte:
-            self.produkte.remove(product)
+    def produkt_entfernen(self, productnumber):
+        if productnumber in self.produkte:
+            del self.produkte[productnumber]
             print("Produkt erfolgreich entfernt!")
         else:
             print("Das Produkt ist nicht im Katalog.")
@@ -25,15 +22,17 @@ class Produktkatalog:
     def produktkatalog_anzeigen(self):
         if self.produkte:
             print("Produktkatalog:")
-            for product in self.produkte:
+            for productnumber, product in self.produkte.items():
+                print(f"Produktnummer: {productnumber}")
                 print(product)
+                print()
         else:
             print("Der Produktkatalog ist leer.")
 
     def produktkatalog_speichern(self, file):
         try:
             with open(file, 'w') as f:
-                for product in self.produkte:
+                for productnumber, product in self.produkte.items():
                     if isinstance(product, Stoff):
                         f.write(
                             f"{product.name},{product.description},{product.price},{product.productnumber},"
@@ -58,7 +57,7 @@ class Produktkatalog:
                     description = product_info[1]
                     price = float(product_info[2])
                     productnumber = int(product_info[3])
-                    discount = product_info[4].split(',')
+                    discount = product_info[4].split('|')
                     manufacturing_location = product_info[5]
                     manufacturing_type = product_info[6]
                     if len(product_info) > 7:
@@ -110,18 +109,8 @@ def main():
             katalog.produkt_hinzufuegen(product)
 
         elif choice == "2":
-            if katalog.produkte:
-                print("Wählen Sie das zu entfernende Produkt aus:")
-                for index, product in enumerate(katalog.produkte, start=1):
-                    print(f"{index}. {product.name}")
-                try:
-                    selection = int(input("Ihre Auswahl: "))
-                    selected_product = katalog.produkte[selection - 1]
-                    katalog.produkt_entfernen(selected_product)
-                except (ValueError, IndexError):
-                    print("Ungültige Auswahl!")
-            else:
-                print("Der Produktkatalog ist leer.")
+            productnumber = int(input("Bitte geben Sie die Produktnummer des zu entfernenden Produkts ein: "))
+            katalog.produkt_entfernen(productnumber)
 
         elif choice == "3":
             katalog.produktkatalog_anzeigen()
