@@ -4,18 +4,22 @@ import Pruefling
 LISTE_PRUEFLING = []
 # Leere Liste, die später mehrere Objekte der Klasse Prüfling aufnehmen soll.
 
+# Rundungsfunktion
+def round_to_half(grade):
+    return round(grade * 2) / 2
+
+# Berechnung der finalen Note für einen Prüfling basierend auf dem Wetter
 def berechnung(pruefling, wetter):
     pruefung = pruefling.test_grade
 
-    if pruefling.eye_color == "dunkel" or pruefling.eye_color == 0:
-        if pruefling.hair_style == "lang" or pruefling.hair_style == 1:
-            pruefling.final_grade = pruefling.test_grade * 0.9
-        else:
-            pruefling.final_grade = pruefling.test_grade * 1.1
-    elif (pruefling.eye_color == 1 or pruefling.eye_color == "hell") and (pruefling.hair_style == "kurz" or pruefling.hair_style == 0):
-        pruefling.final_grade = pruefling.test_grade * 0.9
-    elif ((pruefling.eye_color == 1 or pruefling.eye_color == 0) and (pruefling.hair_style == "lang" or pruefling.hair_style == 1)):
-        pruefling.final_grade = pruefling.test_grade * 1.1
+    if pruefling.eye_color == "dunkel" and pruefling.hair_style == "lang":
+        pruefling.final_grade = round_to_half(pruefling.test_grade * 1.1)
+    elif pruefling.eye_color == "dunkel" and pruefling.hair_style == "kurz":
+        pruefling.final_grade = round_to_half(pruefling.test_grade * 0.9)
+    elif pruefling.eye_color == "hell" and pruefling.hair_style == "lang":
+        pruefling.final_grade = round_to_half(pruefling.test_grade * 1.1)
+    elif pruefling.eye_color == "hell" and pruefling.hair_style == "kurz":
+        pruefling.final_grade = round_to_half(pruefling.test_grade * 0.9)
     else:
         print("Es ist ein Fehler aufgetreten")
         return
@@ -23,22 +27,20 @@ def berechnung(pruefling, wetter):
     if wetter == "schön":
         pruefling.final_grade -= 1
 
-    if pruefling.final_grade > 6.0:
-        pruefling.final_grade = 6.0
-    elif pruefling.final_grade < 1.0:
-        pruefling.final_grade = 1.0
-    else:
-        pruefling.final_grade = round(pruefling.final_grade * 2) / 2
+    # Stelle sicher, dass die Abschlussnote zwischen 1 und 6 liegt
+    pruefling.final_grade = max(1, min(6, pruefling.final_grade))
 
-def final_grade_calculation():
-    i = 0
-    count_prueflinge = len(LISTE_PRUEFLING)
+    print(pruefling)
+    print(f"Das Wetter war: {wetter}")
 
-    while i < count_prueflinge:
-        berechnung(LISTE_PRUEFLING[i], wetter)
-        print(LISTE_PRUEFLING[i])
-        print("Das Wetter war: {wetter}")
-        i = i + 1
+# Berechnung der finalen Noten für alle Prüflinge in der Liste
+def final_grade_calculation(wetter):
+    for pruefling in LISTE_PRUEFLING:
+        # Berechne die Abschlussnote für jeden Prüfling
+        berechnung(pruefling, wetter)
+        print(pruefling)
+        print(f"Das Wetter war: {wetter}")
+
 # Prüfling hinzufügen
 def add_pruefling():
     # Benutzereingabe mit Validierung für Augenfarbe
@@ -94,25 +96,14 @@ def load_prueflinge():
     except FileNotFoundError:
         print("Es wurden noch keine Prüflinge gespeichert.")
 
-# Funktion zum berechnen der Anschlussnoten
-def calculate_final_grades():
-    wetter = input("Wetter 'schön' oder 'nicht schön' ?").lower()
-    for pruefling in LISTE_PRUEFLING:
-        # Berechne die Abschlussnote für jeden Prüfling
-        berechnung(pruefling, wetter)
-        print(pruefling)
-        print(f"Das Wetter war: {wetter}")
-
+# Menü anzeigen
 def show_menu():
     print("\nMenü:")
     print("1. Prüfling hinzufügen")
     print("2. Abschlussnoten berechnen")
     print("3. Programm beenden")
 
-
-
-print(len(LISTE_PRUEFLING))
-
+# Main-funktion
 def main():
     while True:
         show_menu()
@@ -124,7 +115,8 @@ def main():
             if not LISTE_PRUEFLING:
                 print("Es wurden keine Prüflinge hinzugefügt.")
             else:
-                calculate_final_grades()
+                wetter = input("Wetter 'schön' oder 'nicht schön' ?").lower()
+                final_grade_calculation(wetter)
         elif choice == "3":
             # speichern der neu angelegten Prüflinge in .txt Datei
             save_prueflinge()
