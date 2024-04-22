@@ -1,0 +1,15 @@
+members = [
+    {"name": "Anna", "age": 28, "gender": "female", "bmi": 22, "social_friends": 200, "posts_per_week": 5, "training_frequency": 5, "base_price": 12.59},
+    {"name": "Bob", "age": 65, "gender": "male", "bmi": 26, "social_friends": 60, "posts_per_week": 4, "training_frequency": 2, "base_price": 15.59},
+    {"name": "Clara", "age": 19, "gender": "female", "bmi": 23, "social_friends": 30, "posts_per_week": 2, "training_frequency": 3, "base_price": 17.59},
+    {"name": "David", "age": 45, "gender": "male", "bmi": 29, "social_friends": 10, "posts_per_week": 0, "training_frequency": 1, "base_price": 13.59},
+    {"name": "Eva", "age": 72, "gender": "female", "bmi": 21, "social_friends": 55, "posts_per_week": 3, "training_frequency": 4, "base_price": 14.59},
+    {"name": "Stefan", "age": 54, "gender": "male", "bmi": 19.2, "social_friends": 0,
+    "posts_per_week": 0, "training_frequency": 3, "base_price": 16.59},
+    {"name": "Thorsten", "age": 33, "gender": "male", "bmi": 35, "social_friends": 157,
+    "posts_per_week": 19, "training_frequency": 5, "base_price": 12.59},
+    {"name": "Amelie", "age": 21, "gender": "female", "bmi": 23, "social_friends": 15789,
+    "posts_per_week": 153, "training_frequency": 5, "base_price": 14.59},
+    {"name": "Gracia", "age": 34, "gender": "divers", "bmi": 21.6, "social_friends": 89, "posts_per_week": 15, "training_frequency": 1, "base_price": 9.99}
+]
+
